@@ -1,7 +1,7 @@
 #include "hello.h"
 #include <iostream>
 void myproject :: sayHello () {
-	std :: cout << "Hello, world" << std::andl;
+	std :: cout << "Hello, world" << std::endl;
 	std::string s;
 	while (true){
 		std::cin >> s;
