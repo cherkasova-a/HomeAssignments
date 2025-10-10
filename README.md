@@ -5,7 +5,7 @@
 st140594@student.spbu.ru
 ## Description
 Home assingment 1 - extended "Hello world". First says "Hello, World". After this reads a string in a cycle and says "Hell, <string>"
-##Build
+## Build
 make
 ## Run
 ./hello
