@@ -1,3 +1,8 @@
+/*
+*Anastasia Cherkasova
+*st140594@student.spbu.ru
+*Assignment1
+*/
 #include "hello.h"
 #include <iostream>
 void myproject :: sayHello () {
