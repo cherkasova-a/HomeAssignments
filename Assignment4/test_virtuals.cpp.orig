@@ -1,0 +1,40 @@
+/*
+*Anastasia Cherkasova
+*st140594@student.spbu.ru
+*Assignment4
+*/
+#include "gtest/gtest.h"
+#include "Autobot.h"
+#include "Decepticon.h"
+#include "Dinobot.h"
+#include <vector>
+
+TEST(Virtuals, DirectAndBasePointer) {
+    Engine e1("E", 1);
+    Gun g1("G", 1);
+
+    Autobot a("A",1,1,1,true,e1,&g1,"ally",1);
+    ASSERT_TRUE(a.Transform()); // direct
+
+    Transformer* t = new Decepticon("D",2,2,2,true,e1,&g1,10,10);
+    ASSERT_TRUE(t->Transform()); // via base pointer
+    delete t;
+}
+
+TEST(Virtuals, VectorCalls) {
+    Engine e("E", 10);
+    Gun g("G", 10);
+
+    std::vector<Transformer*> v;
+    for (int i = 0; i < 3; ++i) v.push_back(new Autobot("A", i, 10 + i, 5, true, e, &g, "ally", i));
+    for (int i = 0; i < 3; ++i) v.push_back(new Decepticon("D", i, 20 + i, 6, true, e, &g, 50 + i, i));
+    for (int i = 0; i < 3; ++i) v.push_back(new Dinobot("Di", i, 30 + i, 7, true, e, &g, 90 + i, i));
+
+    for (auto p : v) {
+        ASSERT_TRUE(p->Move());
+        ASSERT_TRUE(p->Fire());
+        ASSERT_TRUE(p->Transform());
+    }
+
+    for (auto p : v) delete p;
+}

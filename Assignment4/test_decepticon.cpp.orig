@@ -1,0 +1,28 @@
+/*
+*Anastasia Cherkasova
+*st140594@student.spbu.ru
+*Assignment4
+*/
+#include "gtest/gtest.h"
+#include "Decepticon.h"
+
+TEST(DecepticonTest, CtorsAndMethods) {
+    Engine eng("E", 200);
+    Gun gun("G", 10);
+    Decepticon d("D", 2, 20, 6, true, eng, &gun, 80, 50);
+    ASSERT_EQ(d.getLevel(), 2);
+    d.setStealth(90);
+    ASSERT_EQ(d.getStealth(), 90);
+
+    ASSERT_TRUE(d.Move());
+    ASSERT_TRUE(d.Fire());
+    ASSERT_TRUE(d.Transform());
+}
+
+TEST(DecepticonTest, CopyCtor) {
+    Engine eng("E", 200);
+    Gun gun("G", 10);
+    Decepticon d("D",2,20,6,true,eng,&gun,5,6);
+    Decepticon e(d);
+    ASSERT_EQ(e.getRage(), 6);
+}

@@ -1,0 +1,110 @@
+/*
+*Anastasia Cherkasova
+*st140594@student.spbu.ru
+*Assignment4
+*/
+#include "Transformer.h"
+#include <iostream>
+
+Transformer::Transformer()
+    : name_("Unnamed"), level_(0), power_(0), speed_(0), armor_(false), engine_(), gun_(nullptr) {}
+
+Transformer::Transformer(const std::string& name, int level, int power, int speed,
+                         bool armor, const Engine& engine, Gun* gun)
+    : name_(name), level_(level), power_(power), speed_(speed), armor_(armor), engine_(engine), gun_(gun) {}
+
+Transformer::Transformer(const Transformer& other)
+    : name_(other.name_), level_(other.level_), power_(other.power_),
+      speed_(other.speed_), armor_(other.armor_), engine_(other.engine_), gun_(other.gun_) {}
+
+Transformer::~Transformer() {}
+
+bool Transformer::Move()
+{
+    std::cout << "Transformer::Move\n";
+    return true;
+}
+bool Transformer::Fire()
+{
+    std::cout << "Transformer::Fire\n";
+    return true;
+}
+
+void Transformer::PrintInfo() const
+{
+    std::cout << "Transformer::PrintInfo\n";
+}
+
+void Transformer::setName(const std::string& name)
+{
+    name_ = name;
+}
+std::string Transformer::getName() const
+{
+    return name_;
+}
+
+void Transformer::setLevel(int level)
+{
+    level_ = level;
+}
+int Transformer::getLevel() const
+{
+    return level_;
+}
+
+void Transformer::setPower(int power)
+{
+    power_ = power;
+}
+int Transformer::getPower() const
+{
+    return power_;
+}
+
+void Transformer::setSpeed(int speed)
+{
+    speed_ = speed;
+}
+int Transformer::getSpeed() const
+{
+    return speed_;
+}
+
+void Transformer::setArmor(bool armor)
+{
+    armor_ = armor;
+}
+bool Transformer::getArmor() const
+{
+    return armor_;
+}
+
+void Transformer::setGun(Gun* gun)
+{
+    gun_ = gun;
+}
+Gun* Transformer::getGun() const
+{
+    return gun_;
+}
+
+Engine Transformer::getEngine() const
+{
+    return engine_;
+}
+
+std::ostream& operator<<(std::ostream& os, const Transformer& t)
+{
+    os << "Transformer(name=" << t.name_
+       << ", level=" << t.level_
+       << ", power=" << t.power_
+       << ", speed=" << t.speed_
+       << ", armor=" << (t.armor_ ? "true" : "false")
+       << ", engine=" << t.engine_
+       << ", gun=";
+    if (t.gun_) os << *t.gun_;
+    else os << "null";
+    os << ")";
+    return os;
+}
