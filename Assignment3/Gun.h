@@ -1,27 +1,36 @@
 /*
 *Anastasia Cherkasova
 *st140594@student.spbu.ru
-*Assignment3
+*Assignment4
 */
 #ifndef GUN_H
 #define GUN_H
 
 #include <string>
+#include <ostream>
 
-class Gun {
- public:
-  Gun(std::string model, int ammo);
-  ~Gun();
+class Gun
+{
+public:
+    Gun();
+    Gun(const std::string& model, int ammo);
+    Gun(const Gun& other);
+    ~Gun();
 
-  void setModel(const std::string& model);
-  std::string getModel();
+    void setModel(const std::string& model);
+    std::string getModel() const;
 
-  void setAmmo(int ammo);
-  int getAmmo();
+    void setAmmo(int ammo);
+    int getAmmo() const;
 
- private:
-  std::string model_;
-  int ammo_;
+    virtual void PrintInfo() const;
+    virtual void FireSound() const;
+
+    friend std::ostream& operator<<(std::ostream& os, const Gun& g);
+
+private:
+    std::string model_;
+    int ammo_;
 };
 
 #endif

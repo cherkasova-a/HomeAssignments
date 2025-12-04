@@ -1,35 +1,30 @@
 /*
 *Anastasia Cherkasova
 *st140594@student.spbu.ru
-*Assignment3
+*Assignment4
 */
 #include "gtest/gtest.h"
 #include "Dinobot.h"
-#include "Engine.h"
-#include "Gun.h"
 
-TEST(DinobotTest, ConstructorAndSetters)
+TEST(DinobotTest, CtorsAndMethods)
 {
-    Engine engine("V8", 1000);
-    Gun gun("Laser", 50);
+    Engine eng("E", 300);
+    Gun gun("G", 20);
+    Dinobot di("Di", 3, 30, 7, true, eng, &gun, 99, 5);
+    ASSERT_EQ(di.getPower(), 30);
+    di.setFerocity(100);
+    ASSERT_EQ(di.getFerocity(), 100);
 
-
-    Dinobot di("Grimlock", 7, 150, 40, true, engine, &gun, 90, 5);
-
-    di.setFerocity(95);
-    ASSERT_EQ(di.getFerocity(), 95);
-
-    di.setSize(6);
-    ASSERT_EQ(di.getSize(), 6);
+    ASSERT_TRUE(di.Move());
+    ASSERT_TRUE(di.Fire());
+    ASSERT_TRUE(di.Transform());
 }
 
-TEST(DinobotTest, Methods)
+TEST(DinobotTest, CopyCtor)
 {
-    Engine engine("V8", 1000);
-    Gun gun("Laser", 50);
-
-    Dinobot di("Grimlock", 7, 150, 40, true, engine, &gun, 90, 5);
-
-    ASSERT_TRUE(di.Roar());
-    ASSERT_TRUE(di.Transform());
+    Engine eng("E", 300);
+    Gun gun("G", 20);
+    Dinobot di("Di",3,30,7,true,eng,&gun,10,2);
+    Dinobot copy(di);
+    ASSERT_EQ(copy.getSize(), 2);
 }

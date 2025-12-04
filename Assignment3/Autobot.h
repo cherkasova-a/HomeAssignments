@@ -1,32 +1,41 @@
 /*
 *Anastasia Cherkasova
 *st140594@student.spbu.ru
-*Assignment3
+*Assignment4
 */
 #ifndef AUTOBOT_H
 #define AUTOBOT_H
 
 #include "Transformer.h"
 #include <string>
+#include <ostream>
 
-class Autobot : public Transformer {
- public:
-  Autobot(std::string name, int level, int power, int speed, bool armor,
-          Engine engine, Gun* gun, std::string ally, int speedBoost);
-  ~Autobot();
+class Autobot : public Transformer
+{
+public:
+    Autobot();
+    Autobot(const std::string& name, int level, int power, int speed, bool armor,
+            const Engine& engine, Gun* gun, const std::string& ally, int speedBoost);
+    Autobot(const Autobot& other);
+    ~Autobot();
 
-  void setAlly(const std::string& ally);
-  std::string getAlly();
+    void setAlly(const std::string& ally);
+    std::string getAlly() const;
 
-  void setSpeedBoost(int speed);
-  int getSpeedBoost();
+    void setSpeedBoost(int speed);
+    int getSpeedBoost() const;
 
-  bool Heal();
-  bool Transform();
+    bool Move() override;
+    bool Fire() override;
+    bool Transform() override;
 
- private:
-  std::string ally_;
-  int speedBoost_;
+    void PrintInfo() const override;
+
+    friend std::ostream& operator<<(std::ostream& os, const Autobot& a);
+
+private:
+    std::string ally_;
+    int speedBoost_;
 };
 
 #endif

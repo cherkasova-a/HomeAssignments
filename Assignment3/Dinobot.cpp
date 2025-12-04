@@ -1,21 +1,60 @@
 /*
 *Anastasia Cherkasova
 *st140594@student.spbu.ru
-*Assignment3
+*Assignment4
 */
 #include "Dinobot.h"
+#include <iostream>
 
-Dinobot::Dinobot(std::string name, int level, int power, int speed, bool armor,
-                 Engine engine, Gun* gun, int ferocity, int size):
- Transformer(name, level, power, speed, armor, engine, gun),
-      ferocity_(ferocity), size_(size)  {}
+Dinobot::Dinobot() : Transformer(), ferocity_(0), size_(0) {}
+Dinobot::Dinobot(const std::string& name, int level, int power, int speed, bool armor,
+                 const Engine& engine, Gun* gun, int ferocity, int size)
+    : Transformer(name, level, power, speed, armor, engine, gun), ferocity_(ferocity), size_(size) {}
+Dinobot::Dinobot(const Dinobot& other) : Transformer(other), ferocity_(other.ferocity_), size_(other.size_) {}
 Dinobot::~Dinobot() {}
 
-void Dinobot::setFerocity(int ferocity) { ferocity_ = ferocity; }
-int Dinobot::getFerocity() { return ferocity_; }
+void Dinobot::setFerocity(int ferocity)
+{
+    ferocity_ = ferocity;
+}
+int Dinobot::getFerocity() const
+{
+    return ferocity_;
+}
 
-void Dinobot::setSize(int size) { size_ = size; }
-int Dinobot::getSize() { return size_; }
+void Dinobot::setSize(int size)
+{
+    size_ = size;
+}
+int Dinobot::getSize() const
+{
+    return size_;
+}
 
-bool Dinobot::Roar() { return true; }
-bool Dinobot::Transform() { return true; }
+bool Dinobot::Move()
+{
+    std::cout << "Dinobot::Move\n";
+    return true;
+}
+bool Dinobot::Fire()
+{
+    std::cout << "Dinobot::Fire\n";
+    return true;
+}
+bool Dinobot::Transform()
+{
+    std::cout << "Dinobot::Transform\n";
+    return true;
+}
+
+void Dinobot::PrintInfo() const
+{
+    std::cout << "Dinobot::PrintInfo\n";
+}
+
+std::ostream& operator<<(std::ostream& os, const Dinobot& d)
+{
+    os << "Dinobot(" << static_cast<const Transformer&>(d)
+       << ", ferocity=" << d.ferocity_ << ", size=" << d.size_ << ")";
+    return os;
+}

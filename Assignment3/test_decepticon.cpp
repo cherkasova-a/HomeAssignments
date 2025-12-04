@@ -1,35 +1,30 @@
 /*
 *Anastasia Cherkasova
 *st140594@student.spbu.ru
-*Assignment3
+*Assignment4
 */
 #include "gtest/gtest.h"
 #include "Decepticon.h"
-#include "Engine.h"
-#include "Gun.h"
 
-TEST(DecepticonTest, ConstructorAndSetters)
+TEST(DecepticonTest, CtorsAndMethods)
 {
-    Engine engine("V8", 1000);
-    Gun gun("Laser", 50);
+    Engine eng("E", 200);
+    Gun gun("G", 10);
+    Decepticon d("D", 2, 20, 6, true, eng, &gun, 80, 50);
+    ASSERT_EQ(d.getLevel(), 2);
+    d.setStealth(90);
+    ASSERT_EQ(d.getStealth(), 90);
 
-
-    Decepticon d("Megatron", 10, 200, 60, true, engine, &gun, 100, 50);
-
-    d.setStealth(80);
-    ASSERT_EQ(d.getStealth(), 80);
-
-    d.setRage(100);
-    ASSERT_EQ(d.getRage(), 100);
+    ASSERT_TRUE(d.Move());
+    ASSERT_TRUE(d.Fire());
+    ASSERT_TRUE(d.Transform());
 }
 
-TEST(DecepticonTest, Methods)
+TEST(DecepticonTest, CopyCtor)
 {
-    Engine engine("V8", 1000);
-    Gun gun("Laser", 50);
-
-    Decepticon d("Megatron", 10, 200, 60, true, engine, &gun, 100, 50);
-
-    ASSERT_TRUE(d.Cloak());
-    ASSERT_TRUE(d.Transform());
+    Engine eng("E", 200);
+    Gun gun("G", 10);
+    Decepticon d("D",2,20,6,true,eng,&gun,5,6);
+    Decepticon e(d);
+    ASSERT_EQ(e.getRage(), 6);
 }

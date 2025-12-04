@@ -1,34 +1,30 @@
 /*
 *Anastasia Cherkasova
 *st140594@student.spbu.ru
-*Assignment3
+*Assignment4
 */
 #include "gtest/gtest.h"
 #include "Autobot.h"
-#include "Engine.h"
-#include "Gun.h"
 
-TEST(AutobotTest, ConstructorAndSetters)
+TEST(AutobotTest, CtorsAndMethods)
 {
-    Engine engine("V8", 1000);
-    Gun gun("Laser", 50);
-
-    Autobot a("Bumblebee", 5, 100, 50, true, engine, &gun, "Optimus", 10);
-
+    Engine eng("E", 100);
+    Gun gun("G", 5);
+    Autobot a("A", 1, 10, 5, true, eng, &gun, "Optimus", 20);
+    ASSERT_EQ(a.getName(), "A");
     a.setAlly("Ironhide");
     ASSERT_EQ(a.getAlly(), "Ironhide");
 
-    a.setSpeedBoost(20);
-    ASSERT_EQ(a.getSpeedBoost(), 20);
+    ASSERT_TRUE(a.Move());
+    ASSERT_TRUE(a.Fire());
+    ASSERT_TRUE(a.Transform());
 }
 
-TEST(AutobotTest, Methods)
+TEST(AutobotTest, CopyCtor)
 {
-    Engine engine("V8", 1000);
-    Gun gun("Laser", 50);
-
-    Autobot a("Bumblebee", 5, 100, 50, true, engine, &gun, "Optimus", 10);
-
-    ASSERT_TRUE(a.Heal());
-    ASSERT_TRUE(a.Transform());
+    Engine eng("E", 100);
+    Gun gun("G", 5);
+    Autobot a("A",1,10,5,true,eng,&gun,"Opti",5);
+    Autobot b(a);
+    ASSERT_EQ(b.getAlly(), "Opti");
 }

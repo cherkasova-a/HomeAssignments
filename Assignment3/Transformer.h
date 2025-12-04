@@ -1,54 +1,61 @@
 /*
 *Anastasia Cherkasova
 *st140594@student.spbu.ru
-*Assignment3
+*Assignment4
 */
 #ifndef TRANSFORMER_H
 #define TRANSFORMER_H
 
 #include <string>
+#include <ostream>
 #include "Engine.h"
 #include "Gun.h"
 
-class Transformer {
- public:
-  Transformer(std::string name, int level, int power, int speed,
- bool armor, Engine engine, Gun* gun);//constructor
-  ~Transformer();//destructor
+class Transformer
+{
+public:
+    Transformer();
+    Transformer(const std::string& name, int level, int power, int speed,
+                bool armor, const Engine& engine, Gun* gun);
+    Transformer(const Transformer& other);
+    virtual ~Transformer();
 
-  //Metods
-  bool Move();
-  bool Fire();
-  bool Transform();
+    virtual bool Move();
+    virtual bool Fire();
+    virtual bool Transform() = 0; // чисто виртуальный
 
-  void setName(const std::string& name);
-  std::string getName();
+    virtual void PrintInfo() const;
 
-  void setLevel(int level);
-  int getLevel();
+    void setName(const std::string& name);
+    std::string getName() const;
 
-  void setPower(int power);
-  int getPower();
+    void setLevel(int level);
+    int getLevel() const;
 
-  void setSpeed(int speed);
-  int getSpeed();
+    void setPower(int power);
+    int getPower() const;
 
-  void setArmor(bool armor);
-  bool  getArmor();
+    void setSpeed(int speed);
+    int getSpeed() const;
 
-  void setGun(Gun* gun);
-  Gun* getGun();
+    void setArmor(bool armor);
+    bool getArmor() const;
 
-  Engine getEngine();
+    void setGun(Gun* gun);
+    Gun* getGun() const;
 
- private:
-  std::string name_;
-  int level_;
-  int power_;
-  int speed_;
-  bool armor_;
-  Engine engine_;  // composition
-  Gun* gun_;       //association
+    Engine getEngine() const;
+
+    friend std::ostream& operator<<(std::ostream& os, const Transformer& t);
+
+private:
+    std::string name_;
+    int level_;
+    int power_;
+    int speed_;
+    bool armor_;
+    Engine engine_;
+    Gun* gun_;
 };
 
 #endif

@@ -1,31 +1,40 @@
 /*
 *Anastasia Cherkasova
 *st140594@student.spbu.ru
-*Assignment3
+*Assignment4
 */
 #ifndef DINOBOT_H
 #define DINOBOT_H
 
 #include "Transformer.h"
+#include <ostream>
 
-class Dinobot : public Transformer {
- public:
-  Dinobot(std::string name, int level, int power, int speed, bool armor,
-          Engine engine, Gun* gun, int ferocity, int size);
-  ~Dinobot();
+class Dinobot : public Transformer
+{
+public:
+    Dinobot();
+    Dinobot(const std::string& name, int level, int power, int speed, bool armor,
+            const Engine& engine, Gun* gun, int ferocity, int size);
+    Dinobot(const Dinobot& other);
+    ~Dinobot();
 
-  void setFerocity(int ferocity);
-  int getFerocity();
+    void setFerocity(int ferocity);
+    int getFerocity() const;
 
-  void setSize(int size);
-  int getSize();
+    void setSize(int size);
+    int getSize() const;
 
-  bool Roar();
-  bool Transform() ;
+    bool Move() override;
+    bool Fire() override;
+    bool Transform() override;
 
- private:
-  int ferocity_;
-  int size_;
+    void PrintInfo() const override;
+
+    friend std::ostream& operator<<(std::ostream& os, const Dinobot& d);
+
+private:
+    int ferocity_;
+    int size_;
 };
 
-#endif 
+#endif
