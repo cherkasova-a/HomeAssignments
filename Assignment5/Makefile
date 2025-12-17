@@ -3,8 +3,8 @@ CXXFLAGS = -std=c++20 -Wall -Wextra -pedantic
 LDFLAGS = -lgtest -lgtest_main -pthread
 
 TARGET = test_matrix
-SRCS = test_matrix.cpp
-OBJS = $(SRCS:.cpp=.o)
+SRCS = test_matrix.cpp Rational.cpp
+OBJS = test_matrix.o Rational.o
 
 all: $(TARGET)
 
